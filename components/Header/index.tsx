@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 
 import { BellIcon, SearchIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
+import useAuth from '../../custom-hooks/useAuth'
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
+  const { logOut } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,22 +28,24 @@ function Header() {
   return (
     <header className={`${isScrolled && 'bg-[#141414]'}`}>
       <div className='flex items-center space-x-2 md:space-x-10'>
-        <img
+        {/* <img
           src='https://rb.gy/ulxxee'
           width={100}
           height={100}
           className='cursor-pointer object-contain'
-        />
+        /> */}
 
-        {/* <div className="absolute h-24 w-24 cursor-pointer md:relative">
+        <div className='relative h-8 w-24 cursor-pointer'>
           <Image
-            layout="fill"
-            alt="netflix-logo"
-            objectFit="contain"
-            src="https://rb.gy/ulxxee"
-            loader={() => `https://rb.gy/ulxxee?w=${100}&q=${75}`}
+            layout='fill'
+            alt='netflix-logo'
+            objectFit='contain'
+            src='https://rb.gy/ulxxee'
+            loader={({ width, quality }) =>
+              `https://rb.gy/ulxxee?w=${width}&q=${quality || 75}`
+            }
           />
-        </div> */}
+        </div>
 
         <ul className='hidden space-x-4 md:flex'>
           <li className='headerLink'>Home</li>
@@ -57,17 +61,17 @@ function Header() {
         <p className='hidden lg:inline'>Kids</p>
         <BellIcon className='h-6 w-6' />
 
-        <Link href='/account'>
-          <div className='relative h-6 w-6'>
-            <Image
-              layout='fill'
-              alt='account-img'
-              objectFit='contain'
-              src='https://rb.gy/g1pwyx'
-              className='cursor-pointer rounded'
-            />
-          </div>
-        </Link>
+        {/* <Link href='/account'> */}
+        <div onClick={logOut} className='relative h-6 w-6'>
+          <Image
+            layout='fill'
+            alt='account-img'
+            objectFit='contain'
+            src='https://rb.gy/g1pwyx'
+            className='cursor-pointer rounded'
+          />
+        </div>
+        {/* </Link> */}
       </div>
     </header>
   )
