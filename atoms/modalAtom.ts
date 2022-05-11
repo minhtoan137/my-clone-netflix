@@ -4,7 +4,7 @@ import { Movie } from '../interface'
 
 export const modalState = atom<boolean>({
   key: 'modalState',
-  default: true
+  default: false
 })
 
 export const movieState = atom<Movie | DocumentData | null>({
