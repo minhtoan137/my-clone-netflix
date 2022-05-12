@@ -1,6 +1,6 @@
-const { SitemapStream, streamToPromise } = require('sitemap')
+import { SitemapStream, streamToPromise } from 'sitemap'
 
-export default async (req: any, res: any) => {
+export default async (req, res) => {
   try {
     const smStream = new SitemapStream({
       hostname: `https://${req.headers.host}`,
@@ -8,10 +8,10 @@ export default async (req: any, res: any) => {
     })
 
     // List of posts
-    const posts: any = []
+    const posts = []
 
     // Create each URL row
-    posts.forEach((post: any) => {
+    posts.forEach((post) => {
       smStream.write({
         url: `/post/${post.slug}`,
         changefreq: 'daily',
