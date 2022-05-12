@@ -6,6 +6,7 @@ import Banner from '../components/Banner'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
 import Row from '../components/Row'
+import { metaTags } from '../contants'
 import useAuth from '../custom-hooks/useAuth'
 import { Movie } from '../interface'
 import requests from '../utils/request'
@@ -49,6 +50,9 @@ const Home = ({
         <meta name='keywords' content='HTML, CSS, JavaScript' />
         <meta name='author' content='Author' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        {metaTags.map(({ name, content }) => (
+          <meta key={name} name={name} content={content} />
+        ))}
         <link rel='icon' href='/favicon.ico' />
       </Head>
 

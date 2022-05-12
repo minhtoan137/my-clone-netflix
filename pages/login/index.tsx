@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { metaTags } from '../../contants'
 import useAuth from '../../custom-hooks/useAuth'
 
 type Inputs = {
@@ -37,6 +38,9 @@ function Login({}: LoginProps) {
         <meta name='keywords' content='HTML, CSS, JavaScript' />
         <meta name='author' content='Author' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        {metaTags.map(({ name, content }) => (
+          <meta key={name} name={name} content={content} />
+        ))}
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
