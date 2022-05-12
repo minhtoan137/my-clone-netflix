@@ -1,6 +1,5 @@
 import type { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
@@ -46,7 +45,10 @@ const Home = ({
     >
       <Head>
         <title>Home - My Netflix</title>
-        <meta media='' content='My netflix' />
+        <meta name='description' content='My netflix description.' />
+        <meta name='keywords' content='HTML, CSS, JavaScript' />
+        <meta name='author' content='Author' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
