@@ -56,7 +56,7 @@ const Home = ({
           <meta key={name} name={name} content={content} />
         ))}
         <link rel='icon' href='/favicon.ico' />
-        <link rel='canonical' href='https://my-clone-netflix.vercel.app/' />
+        <link href='https://my-clone-netflix.vercel.app/' rel='canonical' />
       </Head>
 
       <Header />
