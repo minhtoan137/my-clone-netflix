@@ -4,5 +4,7 @@ module.exports = {
   images: {
     domains: ['rb.gy', 'image.tmdb.org']
   },
-  redirects: async () => [{ source: '/', destination: '/', permanent: true }]
+  redirects: async () => [
+    { source: '/', destination: '/home', permanent: true }
+  ]
 }
