@@ -38,6 +38,8 @@ function Header() {
         <div className='relative h-8 w-24 cursor-pointer'>
           <Image
             layout='fill'
+            loading='lazy'
+            decoding='async'
             alt='netflix-logo'
             objectFit='contain'
             src='https://rb.gy/ulxxee'

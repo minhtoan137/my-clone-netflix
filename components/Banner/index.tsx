@@ -29,6 +29,8 @@ function Banner({ netflixOriginals }: BannerProps) {
         <Image
           alt='banner'
           layout='fill'
+          loading='lazy'
+          decoding='async'
           objectFit='cover'
           src={`${BASE_URL}/${movie?.backdrop_path || movie?.poster_path}`}
         />

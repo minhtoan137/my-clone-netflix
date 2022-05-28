@@ -22,6 +22,8 @@ function Thumbnail({ movie }: ThumbnailProps) {
     >
       <Image
         layout='fill'
+        loading='lazy'
+        decoding='async'
         alt='img-thumbnail'
         className='rounded-sm object-cover md:rounded'
         src={`https://image.tmdb.org/t/p/w500${
