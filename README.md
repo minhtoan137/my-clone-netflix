@@ -54,3 +54,24 @@ Here's a walkthrough of implemented user stories:
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+---
+
+## Getting Started
+
+First, create .env.local from .env.local.example
+Second, install package to project:
+
+`npm i`
+
+Third, run the development server:
+
+# start
+
+`npm run dev`
+
+# or
+
+`yarn dev`
+
+Then, open http://localhost:3000 with your browser to see the result.
