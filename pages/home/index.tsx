@@ -1,11 +1,13 @@
 import type { GetServerSideProps } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { modalState } from '../../atoms/modalAtom'
 import Banner from '../../components/Banner'
 import Header from '../../components/Header'
 import Row from '../../components/Row'
+import Row2 from '../../components/Row2'
 import { metaTags } from '../../contants'
 import useAuth from '../../custom-hooks/useAuth'
 import { Movie } from '../../interface'
@@ -14,6 +16,7 @@ import requests from '../../utils/request'
 const Modal = dynamic(() => import('../../components/Modal'))
 
 interface HomeProps {
+  nowPlayingMovies: Movie[]
   netflixOriginals: Movie[]
   trendingNow: Movie[]
   topRated: Movie[]
@@ -25,6 +28,7 @@ interface HomeProps {
 }
 
 const Home = ({
+  nowPlayingMovies,
   netflixOriginals,
   trendingNow,
   topRated,
@@ -34,11 +38,10 @@ const Home = ({
   romanceMovies,
   documentaries
 }: HomeProps) => {
-  const { loading } = useAuth()
-
+  // const { loading } = useAuth()
   const [showModal, setShowModal] = useRecoilState(modalState)
 
-  if (loading) return null
+  // if (loading) return null
 
   return (
     <div
@@ -65,6 +68,7 @@ const Home = ({
         <Banner netflixOriginals={netflixOriginals} />
 
         <section className='md:space-y-24'>
+          <Row2 title='Now Playing' movies={[]} />
           <Row title='Trending Now' movies={trendingNow} />
           <Row title='Top Rated' movies={topRated} />
           <Row title='Action Thrillers' movies={actionMovies} />
@@ -83,36 +87,93 @@ const Home = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const [
-    netflixOriginals,
-    trendingNow,
-    topRated,
-    actionMovies,
-    comedyMovies,
-    horrorMovies,
-    romanceMovies,
-    documentaries
-  ] = await Promise.all([
-    fetch(requests.fetchNetflixOriginals).then((res) => res.json()),
-    fetch(requests.fetchTrending).then((res) => res.json()),
-    fetch(requests.fetchTopRated).then((res) => res.json()),
-    fetch(requests.fetchActionMovies).then((res) => res.json()),
-    fetch(requests.fetchComedyMovies).then((res) => res.json()),
-    fetch(requests.fetchHorrorMovies).then((res) => res.json()),
-    fetch(requests.fetchRomanceMovies).then((res) => res.json()),
-    fetch(requests.fetchDocumentaries).then((res) => res.json())
-  ])
+  try {
+    const [
+      nowPlayingMovies,
+      netflixOriginals,
+      trendingNow,
+      topRated,
+      actionMovies,
+      comedyMovies,
+      horrorMovies,
+      romanceMovies,
+      documentaries
+    ] = await Promise.all([
+      fetch(requests.fetchNowPlaying).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchNetflixOriginals)
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json()
+          }
+          return null
+        })
+        .catch((error) => console.log(error, 'toan 1')),
+      fetch(requests.fetchTrending).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchTopRated).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchActionMovies).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchComedyMovies).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchHorrorMovies).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchRomanceMovies).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      }),
+      fetch(requests.fetchDocumentaries).then((res) => {
+        if (res.status === 200) {
+          return res.json()
+        }
+        return null
+      })
+    ])
 
-  return {
-    props: {
-      netflixOriginals: netflixOriginals.results,
-      trendingNow: trendingNow.results,
-      topRated: topRated.results,
-      actionMovies: actionMovies.results,
-      comedyMovies: comedyMovies.results,
-      horrorMovies: horrorMovies.results,
-      romanceMovies: romanceMovies.results,
-      documentaries: documentaries.results
+    return {
+      props: {
+        nowPlayingMovies: nowPlayingMovies.results,
+        netflixOriginals: netflixOriginals.results,
+        trendingNow: trendingNow.results,
+        topRated: topRated.results,
+        actionMovies: actionMovies.results,
+        comedyMovies: comedyMovies.results,
+        horrorMovies: horrorMovies.results,
+        romanceMovies: romanceMovies.results,
+        documentaries: documentaries.results
+      }
+    }
+  } catch (error) {
+    console.log(JSON.stringify(error), '🚀 ~ file:')
+    return {
+      redirect: { destination: '/error-page', permanent: false }
     }
   }
 }

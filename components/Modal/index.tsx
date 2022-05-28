@@ -10,7 +10,7 @@ import {
   XIcon
 } from '@heroicons/react/solid'
 import { Element, Genre, Movie } from '../../interface'
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player/lazy'
 import { FaPlay } from 'react-icons/fa'
 
 interface ModalProps {}
@@ -70,15 +70,17 @@ function Modal({}: ModalProps) {
         </button>
 
         {/** Video Player  */}
-        <div className='relative pt-[55%]'>
-          <ReactPlayer
-            playing
-            width='100%'
-            height='100%'
-            muted={muted}
-            style={{ position: 'absolute', top: 0, left: 0 }}
-            url={`https://www.youtube.com/watch?v=${trailer}`}
-          />
+        <div className='relative border-[1px] border-black pt-[55%]'>
+          {trailer && (
+            <ReactPlayer
+              playing
+              width='100%'
+              height='100%'
+              muted={muted}
+              style={{ position: 'absolute', top: 0, left: 0 }}
+              url={`https://www.youtube.com/watch?v=${trailer}`}
+            />
+          )}
 
           <div className='absolute bottom-10 flex w-full items-center justify-between px-10'>
             <div className='flex space-x-2'>
