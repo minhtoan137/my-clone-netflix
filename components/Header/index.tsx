@@ -25,6 +25,13 @@ function Header() {
     }
   }, [])
 
+  const handleFadeIn = () => {
+    const image = document.querySelectorAll('.img')
+    image?.forEach((item) => {
+      item?.classList.toggle('fade')
+    })
+  }
+
   return (
     <header className={`${isScrolled && 'bg-[#141414]'}`}>
       <div className='flex items-center space-x-2 md:space-x-10'>
@@ -55,6 +62,14 @@ function Header() {
           <li className='headerLink'>Movies</li>
           <li className='headerLink'>New & Popular</li>
           <li className='headerLink'>My List</li>
+          <li className='headerLink'>
+            <button
+              onClick={handleFadeIn}
+              className='rounded bg-blue-500 px-2 py-0.5 text-sm font-bold text-white hover:bg-blue-700'
+            >
+              Fade Effect
+            </button>
+          </li>
         </ul>
       </div>
 

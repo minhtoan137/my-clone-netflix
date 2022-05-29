@@ -25,7 +25,7 @@ function Thumbnail({ movie }: ThumbnailProps) {
         loading='lazy'
         decoding='async'
         alt='img-thumbnail'
-        className='rounded-sm object-cover md:rounded'
+        className='img rounded-sm object-cover transition-opacity duration-700 ease-in-out md:rounded'
         src={`https://image.tmdb.org/t/p/w500${
           movie?.backdrop_path || movie?.poster_path
         }`}

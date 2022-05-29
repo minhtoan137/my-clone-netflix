@@ -20,9 +20,9 @@ The following **optional** features are implemented:
 - [ ] Add a tab bar for **Now Playing** and **Top Rated** movies.
 - [ ] Implement segmented control to switch between list view and grid view.
 - [ ] Add a search bar.
-- [ ] All images fade in.
+- [x] All images fade in.
 - [x] Implement lazy load image.
-- [ ] Customize the highlight and selection effect of the cell.
+- [x] Customize the highlight and selection effect of the cell.
 - [ ] Improve UX loading by skeleton loading.
 - [x] Enhance responsive.
 
@@ -41,7 +41,7 @@ Here's a walkthrough of implemented user stories:
 
 ## License
 
-    Copyright [2016] [your-name]
+    Copyright [2022] [toan.duong]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -59,7 +59,8 @@ Here's a walkthrough of implemented user stories:
 
 ## Getting Started
 
-First, create .env.local from .env.local.example
+First, create .env.local from .env.local.example.
+
 Second, install package to project:
 
 `npm i`

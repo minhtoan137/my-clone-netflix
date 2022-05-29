@@ -65,7 +65,9 @@ const Home = ({
       <Header />
 
       <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16'>
-        <Banner netflixOriginals={netflixOriginals} />
+        {/* <Banner netflixOriginals={netflixOriginals} /> */}
+
+        <div className='flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[10vh] lg:justify-end lg:pb-12' />
 
         <section className='md:space-y-24'>
           <Row2 title='Now Playing' movies={[]} />
