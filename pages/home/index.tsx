@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { modalState } from '../../atoms/modalAtom'
+import { modalState, viewState } from '../../atoms/modalAtom'
 import Banner from '../../components/Banner'
 import Header from '../../components/Header'
 import Row from '../../components/Row'
@@ -40,6 +40,8 @@ const Home = ({
 }: HomeProps) => {
   // const { loading } = useAuth()
   const [showModal, setShowModal] = useRecoilState(modalState)
+  const [view, changeView] = useRecoilState(viewState)
+  // console.log('🚀 ~ file: index.tsx ~ line 28 ~ Row ~ view', view)
 
   // if (loading) return null
 
@@ -65,25 +67,47 @@ const Home = ({
       <Header />
 
       <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16'>
-        {/* <Banner netflixOriginals={netflixOriginals} /> */}
+        <Banner netflixOriginals={netflixOriginals} />
 
-        <div className='flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[10vh] lg:justify-end lg:pb-12' />
+        {/* <div className='flex flex-col space-y-2 py-4 md:space-y-4 lg:h-[5vh] lg:justify-end lg:pb-12' /> */}
 
         <section className='md:space-y-24'>
+          <div className='flex items-center justify-center'>
+            <button
+              onClick={() => changeView('list')}
+              className={`mr-5 inline-block rounded-lg ${
+                view === 'list' ? 'bg-[#4fa2eb]' : 'bg-transparent'
+              } py-4 px-4 text-center text-sm font-medium ${
+                view === 'list' ? 'text-white' : 'text-gray-500'
+              } hover:bg-[#4fa2eb] hover:text-white `}
+            >
+              List View
+            </button>
+            <button
+              onClick={() => changeView('grid')}
+              className={`rounded-lg py-4 px-4 text-center text-sm font-medium
+            ${view === 'grid' ? 'bg-[#4fa2eb]' : 'bg-transparent'}
+            ${view === 'grid' ? 'text-white' : 'text-gray-500'}
+            hover:bg-[#4fa2eb] hover:text-white `}
+            >
+              Grid View
+            </button>
+          </div>
+
           <Row2 title='Now Playing' movies={[]} />
-          <Row title='Trending Now' movies={trendingNow} />
+          {/* <Row title='Trending Now' movies={trendingNow} />
           <Row title='Top Rated' movies={topRated} />
           <Row title='Action Thrillers' movies={actionMovies} />
           <Row title='Comedies' movies={comedyMovies} />
           <Row title='Scary Movies' movies={horrorMovies} />
           <Row title='Romance Movies' movies={romanceMovies} />
-          <Row title='Documentaries' movies={documentaries} />
+          <Row title='Documentaries' movies={documentaries} /> */}
         </section>
       </main>
 
       {showModal && <Modal />}
 
-      <footer className='flex h-24 w-full items-center justify-center border-t'></footer>
+      {/* <footer className='flex h-24 w-full items-center justify-center border-t'></footer> */}
     </div>
   )
 }

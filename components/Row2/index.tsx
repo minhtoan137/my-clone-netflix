@@ -1,6 +1,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { viewState } from '../../atoms/modalAtom'
 import { Movie } from '../../interface'
 import requests from '../../utils/request'
 import Thumbnail from '../Thumbnail'
@@ -21,6 +24,8 @@ function Row({ title, movies }: RowProps) {
   const [isMoved, setIsMoved] = useState<boolean>(false)
   const [nowPlayingMovies, setNowPlayingMovies] = useState<Movie[] | null>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
+
+  const [view] = useRecoilState(viewState)
 
   const fetchData = () => {
     try {
@@ -92,10 +97,11 @@ function Row({ title, movies }: RowProps) {
           Refresh
         </button>
       </h2>
+
       <div className='group relative md:-ml-2'>
         {isLoading ? (
           <div>Loading ...</div>
-        ) : (
+        ) : view === 'list' ? (
           <>
             <ChevronLeftIcon
               onClick={() => handleClick(IDirection.LEFT)}
@@ -118,6 +124,12 @@ function Row({ title, movies }: RowProps) {
               className={`absolute right-2 top-0 bottom-0 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100`}
             />
           </>
+        ) : (
+          <div className='relative mb-7 h-72 w-[70vw] cursor-pointer transition duration-200 ease-out md:h-72 md:w-[70vw] md:hover:scale-105'>
+            {nowPlayingMovies?.map((movie) => (
+              <Thumbnail key={movie.id} movie={movie} />
+            ))}
+          </div>
         )}
       </div>
     </div>
